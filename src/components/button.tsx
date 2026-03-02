@@ -15,7 +15,6 @@ export const buttonVariants = tv({
   variants: {
     variant: {
       default: "bg-green-100 hover:bg-green-200",
-      link: "bg-transparent hover:bg-transparent",
     },
     size: {
       md: "h-12 px-5 py-4",
@@ -35,7 +34,6 @@ export const buttonIconVariants = tv({
   variants: {
     variant: {
       default: "",
-      link: "fill-green-100 group-hover:fill-green-200",
     },
     size: {
       md: "size-5",
@@ -51,7 +49,6 @@ export const buttonTextVariants = tv({
   variants: {
     variant: {
       default: "text-white font-bold",
-      link: "text-green-100 group-hover:text-green-200 font-semibold",
     },
   },
   defaultVariants: {
@@ -64,7 +61,6 @@ interface ButtonProps
     Omit<React.ComponentProps<"button">, "size" | "disabled">,
     VariantProps<typeof buttonVariants> {
   icon?: React.ComponentProps<typeof Icon>["svg"];
-  disabled?: boolean;
 }
 
 export function Button({
@@ -80,7 +76,7 @@ export function Button({
   return (
     <button
       type={type}
-      disabled={disabled}
+      disabled={disabled as boolean}
       className={buttonVariants({ variant, size, className, disabled })}
       {...props}
     >

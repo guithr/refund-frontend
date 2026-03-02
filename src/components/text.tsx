@@ -6,7 +6,9 @@ export const textVariants = tv({
   variants: {
     variant: {
       base: "text-sm leading-4 font-normal",
+      "nav-link": "text-sm leading-6 font-semibold",
       "heading-large": "text-xl leading-5 font-bold",
+      "label-base": "text-[10px] leading-3.5",
     },
   },
   defaultVariants: {
