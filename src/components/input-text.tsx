@@ -9,23 +9,22 @@ export const inputTextContainerVariants = tv({
 
 export const inputTextWrapperVariants = tv({
   base: `
-    flex items-center
+    w-full flex items-center
     bg-transparent
     border border-gray-300 rounded-lg
     focus-within:ring-2 focus-within:ring-green-100
     transition
   `,
   variants: {
-    size: {
-      md: "h-12 p-4",
-    },
     disabled: {
       true: "opacity-50 cursor-not-allowed",
+    },
+    size: {
+      md: "h-12 p-4",
     },
   },
   defaultVariants: {
     size: "md",
-    disabled: false,
   },
 });
 
@@ -38,6 +37,7 @@ export const inputTextLabelVariants = tv({
 });
 export const inputTextVariants = tv({
   base: `
+  w-full
   bg-transparent
   text-gray-100
     placeholder:text-gray-200
@@ -48,27 +48,26 @@ export const inputTextVariants = tv({
 
 interface InputTextProps
   extends
-    VariantProps<typeof inputTextWrapperVariants>,
-    Omit<React.ComponentProps<"input">, "size" | "disabled"> {
+    VariantProps<typeof inputTextContainerVariants>,
+    Omit<React.ComponentProps<"input">, "disabled"> {
   label?: string;
   disabled?: boolean;
 }
 
 export function InputText({
   label,
-  size,
   disabled,
   className,
   ...props
 }: InputTextProps) {
   return (
-    <div className={inputTextContainerVariants({})}>
+    <div className={inputTextContainerVariants({ className })}>
       {label && (
         <Text variant="label-base" className={inputTextLabelVariants()}>
           {label}
         </Text>
       )}
-      <div className={inputTextWrapperVariants({ size, disabled, className })}>
+      <div className={inputTextWrapperVariants({ disabled })}>
         <input
           type="text"
           className={inputTextVariants()}

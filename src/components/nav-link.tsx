@@ -3,7 +3,7 @@ import { tv } from "tailwind-variants";
 import { Text } from "./text";
 
 const navLinkVariants = tv({
-  base: "transition hover:text-green-100",
+  base: "px-5 py-3 transition hover:text-green-100",
   variants: {
     state: {
       active: "text-green-100",
