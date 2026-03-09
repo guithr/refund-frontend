@@ -1,15 +1,18 @@
 import * as RadixSelect from "@radix-ui/react-select";
 import { CheckIcon, ChevronDownIcon } from "lucide-react";
 import { tv } from "tailwind-variants";
+import { Text } from "./text";
 
 const triggerVariants = tv({
   base: `
-    relative flex flex-col group gap-2
+    flex flex-col group space-y-2
     items-start w-full max-w-65.5
     outline-none transition-all
     text-2xs text-gray-200
-    data-[state=open]:text-green-100
+  data-[state=open]:text-green-100
     data-[state=open]:font-bold
+    data-disabled:opacity-50
+    
   `,
 });
 
@@ -17,10 +20,12 @@ const triggerBoxVariants = tv({
   base: `
     w-full h-12 rounded-lg
     flex items-center justify-between gap-2
-    border border-gray-300 px-4 py-3.5
+    border border-gray-300 p-4
     text-sm font-normal text-gray-100
+    group-data-placeholder:text-gray-200
     transition-all outline-none
     group-data-[state=open]:border-green-100
+   group-focus-within:border-green-100
   `,
 });
 
@@ -44,8 +49,19 @@ const itemVariants = tv({
   `,
 });
 
+const labelVariants = tv({
+  base: `
+    uppercase 
+    transition-all duration-200
+    group-data-[state=open]:text-green-100
+    group-data-[state=open]:font-bold
+    group-focus-within:font-bold
+    group-focus-within:text-green-100
+  `,
+});
+
 const errorVariants = tv({
-  base: "absolute normal-case bottom-0 left-0 translate-y-full text-sm font-medium text-green-100",
+  base: "text-green-100 font-semibold -mt-1",
 });
 
 type Option = {
@@ -68,16 +84,22 @@ export function SelectInput({
   return (
     <RadixSelect.Root {...props}>
       <RadixSelect.Trigger className={triggerVariants()}>
-        {labelText && <span className="uppercase">{labelText}</span>}
-
+        {labelText && (
+          <Text variant="label-base" className={labelVariants({})}>
+            {labelText}
+          </Text>
+        )}
         <div className={triggerBoxVariants()}>
           <RadixSelect.Value placeholder="Selecione" />
           <RadixSelect.Icon>
-            <ChevronDownIcon />
+            <ChevronDownIcon className="transition-transform size-5 text-gray-300 group-data-[state=open]:rotate-180" />
           </RadixSelect.Icon>
         </div>
-
-        {error && <span className={errorVariants()}>{error}</span>}
+        {error && (
+          <Text variant="body-sm-regular" className={errorVariants()}>
+            {error}
+          </Text>
+        )}
       </RadixSelect.Trigger>
 
       <RadixSelect.Portal>

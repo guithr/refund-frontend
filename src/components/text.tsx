@@ -10,6 +10,8 @@ export const textVariants = tv({
       "heading-large": "text-xl leading-5 font-bold text-gray-100",
       "label-base": "text-[10px] leading-3.5",
       "label-bold": "text-sm leading-4.5 font-bold text-gray-100",
+      "body-md-regular": "text-sm leading-4.5 font-normal",
+      "body-sm-regular": "text-xs leading-4.5 font-normal",
     },
   },
   defaultVariants: {

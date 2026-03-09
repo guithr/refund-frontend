@@ -1,80 +1,75 @@
 import { tv, type VariantProps } from "tailwind-variants";
 import { Text } from "./text";
 
-export const inputTextContainerVariants = tv({
+export const containerVariants = tv({
   base: `
-    flex flex-col gap-2 group
+    flex flex-col space-y-2 group
   `,
 });
-
-export const inputTextWrapperVariants = tv({
+export const labelVariants = tv({
+  base: "uppercase transition-all duration-200 group-focus-within:text-green-100 group-focus-within:font-bold",
+});
+export const inputVariants = tv({
   base: `
-    w-full flex items-center
+  text-gray-100 placeholder:text-gray-200
     bg-transparent
     border border-gray-300 rounded-lg
-    focus-within:ring-2 focus-within:ring-green-100
-    transition
+    transition-all duration-200
+    focus:border-green-100
+    caret-green-100
+    outline-none
   `,
   variants: {
-    disabled: {
-      true: "opacity-50 cursor-not-allowed",
-    },
     size: {
       md: "h-12 p-4",
+    },
+    disabled: {
+      true: "opacity-50 pointer-events-none",
     },
   },
   defaultVariants: {
     size: "md",
+    disabled: false,
   },
 });
-
-export const inputTextLabelVariants = tv({
-  base: `
-  uppercase
-  font-bold
-    group-focus-within:text-green-100
-  `,
-});
-export const inputTextVariants = tv({
-  base: `
-  w-full
-  bg-transparent
-  text-gray-100
-    placeholder:text-gray-200
-    caret-green-100
-    outline-none
-  `,
+export const errorVariants = tv({
+  base: "text-green-100 font-semibold -mt-1",
 });
 
 interface InputTextProps
   extends
-    VariantProps<typeof inputTextContainerVariants>,
+    VariantProps<typeof containerVariants>,
     Omit<React.ComponentProps<"input">, "disabled"> {
-  label?: string;
+  labelText?: string;
+  error?: string;
   disabled?: boolean;
 }
 
 export function InputText({
-  label,
+  labelText,
+  error,
   disabled,
   className,
   ...props
 }: InputTextProps) {
   return (
-    <div className={inputTextContainerVariants({ className })}>
-      {label && (
-        <Text variant="label-base" className={inputTextLabelVariants()}>
-          {label}
+    <div className={containerVariants({ className })}>
+      {labelText && (
+        <Text variant="label-base" className={labelVariants()}>
+          {labelText}
         </Text>
       )}
-      <div className={inputTextWrapperVariants({ disabled })}>
-        <input
-          type="text"
-          className={inputTextVariants()}
-          disabled={disabled}
-          {...props}
-        />
-      </div>
+      <input
+        type="text"
+        className={inputVariants({ disabled })}
+        disabled={disabled}
+        {...props}
+      />
+      {error && (
+        <Text variant="body-sm-regular" className={errorVariants()}>
+          {error}
+        </Text>
+      )}
     </div>
   );
 }
