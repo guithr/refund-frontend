@@ -2,6 +2,7 @@ import { Button } from "../components/button";
 import { Text } from "../components/text";
 import { ButtonIcon } from "../components/button-icon";
 import MagnifyingGlass from "../assets/icons/MagnifyingGlass.svg?react";
+import { File } from "lucide-react";
 import { InputText } from "../components/input-text";
 import { NavLink } from "../components/nav-link";
 import { SelectInput } from "../components/select-input";
@@ -22,6 +23,9 @@ export function PageComponents() {
 
       <div className="flex gap-4">
         <Button>Default</Button>
+        <Button variant="outline" icon={File}>
+          Default
+        </Button>
         <Button disabled>Disabled</Button>
       </div>
       <div className="flex gap-4">
@@ -32,8 +36,8 @@ export function PageComponents() {
       </div>
 
       <div className="flex gap-4">
-        <InputText placeholder="Placeholder" label="título" />
-        <InputText disabled placeholder="Disabled" label="Label" />
+        <InputText placeholder="Placeholder" labelText="título" />
+        <InputText disabled placeholder="Disabled" labelText="Label" />
       </div>
 
       <div className="flex gap-4">

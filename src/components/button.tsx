@@ -15,6 +15,8 @@ export const buttonVariants = tv({
   variants: {
     variant: {
       default: "bg-green-100 hover:bg-green-200",
+      outline:
+        "bg-transparent border border-transparent hover:border-green-200",
     },
     size: {
       md: "h-12 px-5 py-4",
@@ -34,6 +36,7 @@ export const buttonIconVariants = tv({
   variants: {
     variant: {
       default: "",
+      outline: "text-green-100 group-hover:text-green-200",
     },
     size: {
       md: "size-5",
@@ -49,6 +52,7 @@ export const buttonTextVariants = tv({
   variants: {
     variant: {
       default: "text-white font-bold",
+      outline: "text-green-100 group-hover:text-green-200",
     },
   },
   defaultVariants: {
