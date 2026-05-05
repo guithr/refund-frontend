@@ -1,24 +1,36 @@
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router";
-import { PageComponents } from "./pages/page-components";
+import { NuqsAdapter } from "nuqs/adapters/react";
+import { Toaster } from "sonner";
+
 import { Layout } from "./pages/layout";
-import { Home } from "./pages/home";
-import { NewRefund } from "./pages/new-refund";
+
+import { PageComponents } from "./pages/page-components";
 import { RefundDetails } from "./pages/refund-details";
 import { Confirmation } from "./pages/confirmation";
-export function App() {
-  return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/components" element={<PageComponents />} />
+import { NewRefund } from "./pages/new-refund";
+import { Home } from "./pages/home";
 
-        <Route element={<Layout />}>
-          <Route path="/" element={<Home />} />
-          <Route path="/new-refund" element={<NewRefund />} />
-          <Route path="/refunds/:id" element={<RefundDetails />} />
-          <Route path="/components" element={<PageComponents />} />
-          <Route path="/confirmation" element={<Confirmation />} />
-        </Route>
-      </Routes>
-    </BrowserRouter>
+export function App() {
+  const queryClient = new QueryClient();
+  return (
+    <QueryClientProvider client={queryClient}>
+      <NuqsAdapter>
+        <Toaster />
+        <BrowserRouter>
+          <Routes>
+            <Route path="/components" element={<PageComponents />} />
+
+            <Route element={<Layout />}>
+              <Route path="/" element={<Home />} />
+              <Route path="/new-refund" element={<NewRefund />} />
+              <Route path="/refunds/:id" element={<RefundDetails />} />
+              <Route path="/components" element={<PageComponents />} />
+              <Route path="/confirmation" element={<Confirmation />} />
+            </Route>
+          </Routes>
+        </BrowserRouter>
+      </NuqsAdapter>
+    </QueryClientProvider>
   );
 }

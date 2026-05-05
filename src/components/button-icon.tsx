@@ -56,12 +56,10 @@ export function ButtonIcon({
   size,
   disabled,
   className,
-  type = "button",
   ...props
 }: ButtonIconProps) {
   return (
     <button
-      type={type}
       disabled={disabled}
       className={buttonIconContainerVariants({
         className,

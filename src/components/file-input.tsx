@@ -2,6 +2,7 @@ import { Text } from "./text";
 import CloudArrowUpIcon from "../assets/icons/CloudArrowUp.svg?react";
 import { tv } from "tailwind-variants";
 import React from "react";
+import { errorVariants } from "./input-text";
 
 export const containerVariant = tv({
   base: "flex flex-col gap-2 group",
@@ -67,7 +68,9 @@ export function FileInput({
           <CloudArrowUpIcon className="fill-white size-6" />
         </div>
       </div>
-      {error && <span>{error}</span>}
+      <Text variant="body-sm-regular" className={errorVariants()}>
+        {error ?? " "}
+      </Text>
     </label>
   );
 }
